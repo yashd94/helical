@@ -259,8 +259,10 @@ def quant_layers(model):
 
 
 def get_model_input_size(model):
-    return int(re.split("\(|,", str(model.bert.embeddings.position_embeddings))[1])
-
+    try:
+        return int(re.split("\(|,", str(model.bert.embeddings.position_embeddings))[1])
+    except: 
+        return int(re.split("\(|,", str(model.module.bert.embeddings.position_embeddings))[1])
 
 def load_model(model_type, model_directory, device):
     if model_type == "Pretrained":
