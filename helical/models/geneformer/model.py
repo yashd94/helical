@@ -208,6 +208,7 @@ class Geneformer(HelicalRNAModel):
         dataset: Dataset,
         output_attentions: bool = False,
         output_genes: bool = False,
+        device_override: int = None
     ) -> np.array:
         """Gets the gene embeddings from the Geneformer model
 
@@ -246,7 +247,7 @@ class Geneformer(HelicalRNAModel):
             self.tk.token_to_ensembl_dict,
             self.cls_present,
             self.eos_present,
-            self.device,
+            self.device if device_override is None else device_override,
             output_attentions=output_attentions,
             output_genes=output_genes,
         )
